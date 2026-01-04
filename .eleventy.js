@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
 
   // 4. Настройки путей
   return {
+    markdownTemplateEngine": "njk",
     dir: {
       input: "src",
       output: "_site",
