@@ -1,0 +1,147 @@
+<section id="simulator" class="py-20 relative">
+    <div class="container mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="text-center mb-10" data-aos="fade-up">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">
+                Calculate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Profit</span>
+            </h2>
+            <p id="simulatorSubtitle" class="text-gray-400 max-w-2xl mx-auto h-12">
+                Simulate potential savings and income from implementing a referral system.
+            </p>
+        </div>
+
+        <!-- Controls Wrapper -->
+        <div class="glass-card p-6 md:p-10 rounded-3xl border border-white/10 shadow-2xl max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- Switchers -->
+            <div class="flex flex-col md:flex-row justify-center gap-6 mb-12">
+                <!-- Business Type -->
+                <div id="businessTypeSwitcher" class="bg-white/5 p-1 rounded-full flex">
+                    <button class="mode-btn active" data-type="online">🌐 Online Biz</button>
+                    <button class="mode-btn" data-type="offline">🏪 Offline Biz</button>
+                </div>
+                <!-- Role -->
+                <div id="simulatorModeSwitcher" class="bg-white/5 p-1 rounded-full flex">
+                    <button class="mode-btn active" data-mode="author">Owner</button>
+                    <button class="mode-btn" data-mode="partner">Agent</button>
+                </div>
+            </div>
+
+            <!-- Global Sliders -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <div class="flex justify-between text-sm mb-2 text-gray-300">
+                        <span id="priceLabel">Avg Check</span>
+                        <span id="priceValue" class="font-bold text-white">$100</span>
+                    </div>
+                    <input type="range" id="price" class="calc-slider" min="10" max="2000" value="100" step="10">
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2 text-gray-300">
+                        <span id="initialPartnersLabel">Sales/Month</span>
+                        <span id="initialPartnersValue" class="font-bold text-white">10</span>
+                    </div>
+                    <input type="range" id="initialPartners" class="calc-slider" min="1" max="100" value="10" step="1">
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2 text-gray-300">
+                        <span id="duplicationLabel">Virality Factor</span>
+                        <span id="partnerDuplicationValue" class="font-bold text-white">2</span>
+                    </div>
+                    <input type="range" id="partnerDuplication" class="calc-slider" min="0" max="10" value="2" step="1">
+                </div>
+            </div>
+
+            <!-- Columns Grid -->
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                
+                <!-- Classic Model -->
+                <div class="result-column classic bg-white/5 p-6 rounded-2xl border border-white/5">
+                    <h3 id="classicTitle" class="text-xl font-bold mb-1">Standard Affiliate</h3>
+                    <p id="classicSubtitle" class="text-xs text-gray-500 mb-6 h-4">1-2 levels</p>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                <span>Levels Depth</span> <span id="classicLevelsValue">2</span>
+                            </div>
+                            <input type="range" id="classicLevels" class="calc-slider" min="0" max="2" value="2">
+                        </div>
+                        
+                        <!-- Settings Row 1 -->
+                        <div id="classicL1Row" class="flex justify-between items-center text-sm">
+                            <label class="text-gray-400">Level 1 Reward (%)</label>
+                            <input type="number" id="classicL1" class="bg-black/30 border border-white/10 rounded px-2 py-1 w-16 text-right text-white" value="30" min="0" max="100">
+                        </div>
+                        <!-- Settings Row 2 -->
+                        <div id="classicL2Row" class="flex justify-between items-center text-sm">
+                            <label class="text-gray-400">Level 2 Reward (%)</label>
+                            <input type="number" id="classicL2" class="bg-black/30 border border-white/10 rounded px-2 py-1 w-16 text-right text-white" value="5" min="0" max="100">
+                        </div>
+                    </div>
+
+                    <div class="mt-auto pt-6 border-t border-white/10">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm text-gray-400">Total Reach</span>
+                            <span id="classicTotalPartners" class="font-bold text-white">0</span>
+                        </div>
+                        <div class="bg-black/40 p-4 rounded-xl text-center">
+                            <div id="classicIncomeLabel" class="text-xs text-gray-500 uppercase tracking-widest mb-1">Net Income</div>
+                            <div id="classicAuthorIncome" class="text-2xl font-bold text-white">$0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SetHubble Model -->
+                <div class="result-column sethubble bg-indigo-900/20 p-6 rounded-2xl border border-indigo-500/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-[50px] pointer-events-none"></div>
+                    
+                    <h3 class="text-xl font-bold mb-1 text-white">🚀 SetHubble Model</h3>
+                    <p id="sethubbleSubtitle" class="text-xs text-indigo-300 mb-6 h-4">Deep Tier System</p>
+                    
+                    <div class="space-y-4 mb-6 relative z-10">
+                        <div>
+                            <div class="flex justify-between text-xs text-indigo-300 mb-1">
+                                <span>Levels Depth</span> <span id="sethubbleLevelsValue" class="text-white">5</span>
+                            </div>
+                            <input type="range" id="sethubbleLevels" class="calc-slider accent-indigo-500" min="0" max="10" value="5">
+                        </div>
+                        
+                        <div id="sethubbleL1Row" class="flex justify-between items-center text-sm">
+                            <label class="text-indigo-200">Level 1 Reward (%)</label>
+                            <input type="number" id="sethubbleL1" class="bg-indigo-900/40 border border-indigo-500/30 rounded px-2 py-1 w-16 text-right text-white" value="40" min="0" max="90">
+                        </div>
+                        
+                        <div id="sethubbleL2plusRow" class="flex justify-between items-center text-sm">
+                            <label id="sethubbleL2plusLabel" class="text-indigo-200">Lvl 2-10 Reward</label>
+                            <input type="number" id="sethubbleL2plus" class="bg-indigo-900/40 border border-indigo-500/30 rounded px-2 py-1 w-16 text-right text-white" value="5" min="0" max="50">
+                        </div>
+                        <div id="sethubbleWarning" class="text-xs text-yellow-400 h-4"></div>
+                    </div>
+
+                    <div class="mt-auto pt-6 border-t border-indigo-500/30 relative z-10">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm text-indigo-300">Total Reach</span>
+                            <span id="sethubbleTotalPartners" class="font-bold text-white text-xl">0</span>
+                        </div>
+                        <div class="bg-indigo-600/20 p-4 rounded-xl text-center border border-indigo-500/30">
+                            <div id="sethubbleIncomeLabel" class="text-xs text-indigo-300 uppercase tracking-widest mb-1">Net Income</div>
+                            <div id="sethubbleAuthorIncome" class="text-3xl font-bold text-white">$0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="text-center mb-8">
+                <p id="conclusionText" class="text-lg text-gray-300">Adjust sliders to see the scaling potential.</p>
+            </div>
+
+            <!-- Chart -->
+            <div class="h-64 md:h-80 w-full bg-black/20 rounded-xl p-4 border border-white/5">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
