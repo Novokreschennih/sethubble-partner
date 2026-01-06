@@ -10,7 +10,6 @@ pagination:
 permalink: /tags/{{ tag }}/
 layout: layouts/base.njk
 eleventyComputed:
-  # Берем красивое имя из словаря. Если нет - делаем Capitalize
   title: "Topic: {{ siteTags[tag] or tag | capitalize }}"
 ---
 
@@ -29,13 +28,17 @@ eleventyComputed:
         <article class="glass-card rounded-2xl overflow-hidden hover:border-indigo-500/50 transition duration-300 flex flex-col group">
             {% if post.data.image %}
             <div class="h-48 overflow-hidden">
-                 <!-- Если внедрили плагин Image, используйте {% image ... %}, иначе обычный img -->
                  <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             </div>
             {% endif %}
             <div class="p-6 flex flex-col flex-grow">
                 <h2 class="text-xl font-bold mb-2 group-hover:text-indigo-300 transition">{{ post.data.title }}</h2>
+                
+                <!-- Проверка даты перед выводом -->
+                {% if post.date %}
                 <time class="text-xs text-gray-500 mb-4 block">{{ post.date | postDate }}</time>
+                {% endif %}
+                
                 <p class="text-gray-400 text-sm mb-4 line-clamp-2">{{ post.data.description }}</p>
                 <a href="{{ post.url }}" class="mt-auto text-sm text-indigo-400 font-bold hover:text-indigo-300">Read Article →</a>
             </div>
