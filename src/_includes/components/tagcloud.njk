@@ -1,0 +1,11 @@
+<div class="flex flex-wrap gap-2 justify-center">
+    <!-- Перебираем наш словарь -->
+    {% for slug, name in siteTags %}
+        <!-- Показываем тег ТОЛЬКО если есть статьи с ним -->
+        {% if collections[slug] %}
+        <a href="/tags/{{ slug }}/" class="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs md:text-sm hover:bg-indigo-600 hover:border-indigo-500 transition text-gray-400 hover:text-white">
+            #{{ name }}
+        </a>
+        {% endif %}
+    {% endfor %}
+</div>

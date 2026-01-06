@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "start": "eleventy --serve",
-      "build": "eleventy"
+    "start": "eleventy --serve",
+    "build": "eleventy"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +13,9 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "luxon": "^3.7.2"
+  },
+  "dependencies": {
+    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy-plugin-rss": "^2.0.4"
   }
 }
