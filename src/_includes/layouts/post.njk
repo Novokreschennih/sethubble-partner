@@ -9,59 +9,81 @@ layout: layouts/base.njk
     </a>
 
     <!-- Шапка статьи -->
-    <header class="mb-12 text-center">
-        <div class="text-indigo-400 text-sm font-bold tracking-widest uppercase mb-4">{{ tags }}</div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">{{ title }}</h1>
-        <time class="text-gray-500 font-mono text-sm" datetime="{{ date | dateIso }}">{{ date | postDate }}</time>
+    <header class="mb-10 text-center">
+        <!-- ТЕГИ (Красивые кнопки вместо сплошного текста) -->
+        <div class="flex flex-wrap gap-2 justify-center mb-6">
+            {% for tag in tags %}
+                <!-- Исключаем служебный тег 'post' -->
+                {% if tag != "post" %}
+                <a href="/tags/{{ tag }}/" class="text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-indigo-500/30 text-indigo-400 hover:bg-indigo-500/10 transition">
+                    {{ siteTags[tag] or tag }}
+                </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-white">{{ title }}</h1>
+        
+        <div class="flex items-center justify-center gap-4 text-sm text-gray-500 font-mono">
+            <time datetime="{{ date | dateIso }}">{{ date | postDate }}</time>
+            <span>•</span>
+            <span>5 min read</span>
+        </div>
     </header>
 
-    <!-- Картинка (если есть) -->
+    <!-- КАРТИНКА (Исправлено) -->
     {% if image %}
-    <div class="mb-12 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-        <img src="{{ image }}" alt="{{ title }}" class="w-full h-auto object-cover">
+    <div class="mb-12 rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative group">
+        <!-- Используем стандартный тег img для надежности -->
+        <img src="{{ image }}" alt="{{ title }}" class="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
     </div>
     {% endif %}
 
-    <!-- Контент статьи (Typography) -->
-    <div class="prose prose-invert prose-lg max-w-none prose-headings:font-bold prose-a:text-indigo-400 hover:prose-a:text-indigo-300 prose-img:rounded-xl text-gray-300">
+    <!-- Контент статьи -->
+    <!-- prose-lg увеличивает шрифт, prose-invert делает его белым -->
+    <div class="prose prose-lg prose-invert max-w-none 
+                prose-headings:font-bold prose-headings:text-white 
+                prose-p:text-gray-300 prose-p:leading-relaxed
+                prose-a:text-indigo-400 hover:prose-a:text-indigo-300 
+                prose-li:text-gray-300
+                prose-strong:text-white">
         {{ content | safe }}
     </div>
-    <!-- Навигация по статьям (Previous / Next) -->
-    {% set previousPost = collections.post | getPreviousCollectionItem(page) %}
-    {% set nextPost = collections.post | getNextCollectionItem(page) %}
+
+    <!-- Навигация (Следующая/Предыдущая) -->
+    {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+    {% set nextPost = collections.posts | getNextCollectionItem(page) %}
 
     {% if previousPost or nextPost %}
     <div class="border-t border-white/10 mt-16 pt-12">
         <div class="grid md:grid-cols-2 gap-6">
-            
-            <!-- Кнопка "Предыдущая статья" -->
             {% if previousPost %}
             <a href="{{ previousPost.url }}" class="group flex flex-col p-6 rounded-2xl border border-white/10 hover:border-indigo-500/50 hover:bg-white/5 transition duration-300 text-left">
-                <span class="text-xs text-gray-500 mb-2 group-hover:text-indigo-400 uppercase tracking-wider transition-colors">← Previous Article</span>
-                <span class="text-lg font-bold text-white leading-tight group-hover:text-indigo-200 transition-colors">{{ previousPost.data.title }}</span>
+                <span class="text-xs text-gray-500 mb-2 uppercase tracking-wider">← Previous</span>
+                <span class="text-lg font-bold text-white group-hover:text-indigo-300 transition">{{ previousPost.data.title }}</span>
             </a>
             {% else %}
-            <!-- Пустой блок, чтобы правая кнопка осталась справа -->
-            <div class="hidden md:block"></div>
+            <div></div>
             {% endif %}
 
-            <!-- Кнопка "Следующая статья" -->
             {% if nextPost %}
             <a href="{{ nextPost.url }}" class="group flex flex-col p-6 rounded-2xl border border-white/10 hover:border-indigo-500/50 hover:bg-white/5 transition duration-300 text-right">
-                <span class="text-xs text-gray-500 mb-2 group-hover:text-indigo-400 uppercase tracking-wider transition-colors">Next Article →</span>
-                <span class="text-lg font-bold text-white leading-tight group-hover:text-indigo-200 transition-colors">{{ nextPost.data.title }}</span>
+                <span class="text-xs text-gray-500 mb-2 uppercase tracking-wider">Next →</span>
+                <span class="text-lg font-bold text-white group-hover:text-indigo-300 transition">{{ nextPost.data.title }}</span>
             </a>
             {% endif %}
-
         </div>
     </div>
     {% endif %}
+
     <!-- Призыв к действию внизу -->
-    <div class="mt-20 p-8 border border-white/10 rounded-2xl bg-white/5 text-center">
-        <h3 class="text-2xl font-bold mb-4">Ready to start earning?</h3>
-        <p class="text-gray-400 mb-6">Join the ecosystem today and monetize your network.</p>
-        <a href="{{ site.affiliate_link }}" target="_blank" class="inline-block px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold transition">
-            Get Started
+    <div class="mt-20 p-10 border border-indigo-500/30 rounded-3xl bg-indigo-900/10 text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-[80px] pointer-events-none"></div>
+        <h3 class="text-3xl font-bold mb-4 text-white relative z-10">Ready to automate your income?</h3>
+        <p class="text-gray-300 mb-8 max-w-xl mx-auto relative z-10">Use the calculator to see how much you can earn with the SetHubble ecosystem.</p>
+        <a href="/" class="relative z-10 inline-block px-8 py-4 bg-white text-black hover:bg-gray-200 rounded-full font-bold transition shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+            Open Calculator
         </a>
     </div>
 </article>
