@@ -3,7 +3,7 @@ title: "What is SetHubble? A 5-Minute Guide for Product Owners and Affiliate Mar
 description: "Discover how SetHubble turns word-of-mouth recommendations into automated passive income streams through crypto-powered referral marketing. Join the future of monetization."
 date: 2026-01-06
 image: "https://source.unsplash.com/1200x630/?referral,marketing,technology,crypto"
-tags: ["sethubble-guide","affiliate-marketing","passive-income"]
+tags: ["sethubble-guide", "affiliate-marketing", "passive-income"]
 ---
 
 Imagine turning every recommendation you make into a revenue stream. What if your word-of-mouth could generate automated income while you sleep? Welcome to SetHubble—the platform that's revolutionizing how businesses and individuals monetize the "dark matter" of our economy: human recommendations.
@@ -27,6 +27,7 @@ SetHubble functions as a **crypto payment gateway + affiliate aggregator + drops
 ### For Agents: The New Digital Profession
 
 As a SetHubble agent, you become the connector between businesses and customers. Share referral links or QR codes and earn from:
+
 - **Personal sales** you directly generate
 - **Network sales** from up to 10 levels deep
 - **Entire business turnovers** of shops you connect
@@ -46,16 +47,19 @@ Available on paid plans, this system creates explosive earning potential. You ha
 ## Getting Started: Your Path to Automated Income
 
 **For Business Owners:**
+
 - Generate QR codes for your physical location
 - Create digital invoices for referred sales
 - Watch your customer base become your sales force
 
 **For Affiliate Marketers:**
+
 - Connect businesses to the platform
 - Share your referral links across social media
 - Leverage platforms like X (Twitter), LinkedIn, and Reddit communities
 
 **Key Financial Specs:**
+
 - All rewards paid in **USDT (BEP-20)** for low gas fees
 - Free plan: 5% withdrawal fee (3 levels max)
 - Paid plans: 1-3% fee (unlocks 10 levels + binary system)
@@ -69,4 +73,4 @@ Join thousands of product owners and affiliate marketers who are already buildin
 
 **The real question isn't whether you should join SetHubble—it's how much income you're leaving on the table by waiting.**
 
-**[Calculate your potential income here](https://sethubble.online)**
+**[Calculate your potential income here](https://sethubble.online/calculator/)**

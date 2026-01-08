@@ -140,4 +140,4 @@ SetHubble represents more than just another income stream. It's a paradigm shift
 
 The most successful business owners aren't just building businesses—they're building systems that generate businesses. SetHubble provides the infrastructure to do exactly that.
 
-**[Calculate your potential income here](https://sethubble.online)**
+**[Calculate your potential income here](https://sethubble.online/calculator/)**
