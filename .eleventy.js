@@ -43,7 +43,7 @@ module.exports = function (eleventyConfig) {
   // Собираем все .md файлы из папки blog, кроме index.md
   // -----------------------------------------------------------------
   eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/blog/*.md");
+    return collectionApi.getFilteredByGlob("src/blog/posts/*.md");
   });
 
   // -----------------------------------------------------------------
