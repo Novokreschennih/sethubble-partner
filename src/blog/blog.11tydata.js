@@ -1,27 +1,26 @@
 module.exports = {
   eleventyComputed: {
     permalink: (data) => {
-      // 1. ПРОВЕРКА НА ГЛАВНУЮ:
-      // Если в файле включена пагинация (это index.njk)
-      // или имя файла заканчивается на index
-      if (data.pagination || data.page.filePathStem.endsWith("/index")) {
-        // Возвращаем undefined. Это сигнал для 11ty:
-        // "Используй свою стандартную логику, я не вмешиваюсь".
-        return undefined;
+      // 1. ЖЕСТКИЙ ФИЛЬТР:
+      // Если это НЕ markdown-файл (значит, это index.njk или что-то другое),
+      // мы немедленно возвращаем data.permalink, не вмешиваясь в логику.
+      if (!data.page.inputPath.endsWith(".md")) {
+        return data.permalink;
       }
 
-      // 2. ЛОГИКА ЧЕРНОВИКОВ:
+      // 2. ЛОГИКА ДЛЯ СТАТЕЙ (.md):
+      // Если черновик — выключаем генерацию файла
       if (data.draft) {
-        return false; // Не создавать файл
+        return false;
       }
 
-      // 3. ДЛЯ ОБЫЧНЫХ СТАТЕЙ:
-      // Возвращаем то, что указано в статье, или undefined (стандарт)
+      // Иначе — стандартное поведение
       return data.permalink;
     },
 
     eleventyExcludeFromCollections: (data) => {
-      if (data.draft) {
+      // То же самое для списков: если черновик — скрываем
+      if (data.page.inputPath.endsWith(".md") && data.draft) {
         return true;
       }
       return data.eleventyExcludeFromCollections;
