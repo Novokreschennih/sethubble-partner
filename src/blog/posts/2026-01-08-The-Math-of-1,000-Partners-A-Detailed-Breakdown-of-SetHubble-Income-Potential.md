@@ -2,7 +2,7 @@
 title: "The Math of 1,000 Partners: A Detailed Breakdown of SetHubble Income Potential"
 description: "What happens if you invite 1,000 people to SetHubble? We crunch the numbers on Shuttle Plan commissions, daily turnover percentages, and the binary system bonuses."
 date: 2026-01-08
-image: "https://image.pollinations.ai/prompt/futuristic%20holographic%20financial%20graph%20growth%20chart%20neon%20blue%20purple%20dark%20background%20analytics?width=1200&height=630&nologo=true&model=flux&seed=1000"
+image: /assets/img/The-Math-of-1,000-Partners-A-Detailed-Breakdown-of-SetHubble-Income-Potential.jpeg
 tags: ["income-calculator", "sethubble-strategy", "passive-income", "growth-strategies"]
 ---
 
