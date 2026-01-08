@@ -1,28 +1,25 @@
 module.exports = {
   eleventyComputed: {
     permalink: (data) => {
-      // 1. ЖЕСТКИЙ ФИЛЬТР:
-      // Если это НЕ markdown-файл (значит, это index.njk или что-то другое),
-      // мы немедленно возвращаем data.permalink, не вмешиваясь в логику.
-      if (!data.page.inputPath.endsWith(".md")) {
-        return data.permalink;
-      }
-
-      // 2. ЛОГИКА ДЛЯ СТАТЕЙ (.md):
-      // Если черновик — выключаем генерацию файла
+      // 1. ЛОГИКА ДЛЯ ЧЕРНОВИКОВ:
+      // Если в статье стоит draft: true — мы явно запрещаем создание файла.
       if (data.draft) {
         return false;
       }
 
-      // Иначе — стандартное поведение
-      return data.permalink;
+      // 2. ДЛЯ ВСЕГО ОСТАЛЬНОГО (включая index.njk и обычные статьи):
+      // Мы ничего не возвращаем (undefined).
+      // Это критически важно! Это сигнал для 11ty:
+      // "Используй свои стандартные механизмы, пагинацию и настройки из Front Matter".
+      return undefined;
     },
 
     eleventyExcludeFromCollections: (data) => {
-      // То же самое для списков: если черновик — скрываем
-      if (data.page.inputPath.endsWith(".md") && data.draft) {
+      // Убираем черновики из списков (коллекций)
+      if (data.draft) {
         return true;
       }
+      // Иначе оставляем стандартное поведение
       return data.eleventyExcludeFromCollections;
     },
   },
