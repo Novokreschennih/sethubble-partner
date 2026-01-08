@@ -69,6 +69,16 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("dateToRfc3339", (dateObj) => {
     return DateTime.fromJSDate(dateObj).toISO();
   });
+  // Игнорировать черновики при сборке (кроме локальной разработки, если хочешь)
+  eleventyConfig.addGlobalData("eleventyComputed.permalink", function () {
+    return (data) => {
+      // Если draft: true, то permalink = false (файл не создается)
+      if (data.draft) {
+        return false;
+      }
+      return data.permalink;
+    };
+  });
 
   // -----------------------------------------------------------------
   // 5. НАСТРОЙКИ
