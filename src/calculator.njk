@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+title: Profit Simulator & ROI Calculator
+description: Calculate potential earnings for Agents and savings for Business Owners with the SetHubble ecosystem.
+permalink: /calculator/
+eleventyExcludeFromCollections: true
+---
+
+<!-- Контейнер страницы -->
+<div class="min-h-screen pt-24 pb-20">
+    
+    <!-- Заголовок страницы (SEO) -->
+    <div class="container mx-auto px-6 text-center mb-4">
+        <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm">Interactive Tool</span>
+        <h1 class="text-4xl md:text-6xl font-bold mt-2 mb-6">Estimate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Growth</span></h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+            Use this tool to simulate different scenarios: direct sales vs. affiliate network building.
+        </p>
+    </div>
+
+    <!-- Вставка компонента Калькулятора -->
+    {% include "components/calculator.njk" %}
+
+    <!-- Секция с призывом к действию после расчетов -->
+    <div class="container mx-auto px-6 mt-16 text-center">
+        <div class="glass-card p-8 rounded-2xl border border-white/10 inline-block max-w-3xl">
+            <h3 class="text-2xl font-bold mb-4">Like what you see?</h3>
+            <p class="text-gray-400 mb-6">The numbers don't lie. Start building your network today.</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="{{ site.affiliate_link }}" target="_blank" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-full transition shadow-lg shadow-indigo-500/30">
+                    Start Earning Now
+                </a>
+                <a href="/" class="px-8 py-3 border border-white/10 hover:bg-white/5 text-white font-bold rounded-full transition">
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Подключение стилей и скриптов (Обязательно для работы калькулятора) -->
+<link rel="stylesheet" href="/assets/css/calculator.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/assets/js/calculator.js"></script>

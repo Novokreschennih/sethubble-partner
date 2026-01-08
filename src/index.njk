@@ -121,7 +121,50 @@ description: The first global decentralized referral ecosystem. Earn crypto pass
         </div>
     </div>
 </section>
-{% include "components/calculator.njk" %}
+<!-- CALCULATOR TEASER SECTION -->
+<section class="py-24 relative overflow-hidden">
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="glass-card rounded-3xl p-10 md:p-16 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-12 relative">
+            
+            <!-- Декор фона -->
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-indigo-900/20 to-purple-900/20 -z-10"></div>
+            <div class="absolute -right-20 -top-20 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px]"></div>
+
+            <!-- Текст -->
+            <div class="md:w-1/2">
+                <div class="inline-block px-4 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm font-bold mb-6">
+                    Interactive Tool
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Do the math. <br>See your potential.</h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    Stop guessing. Use our advanced ROI simulator to compare traditional marketing vs. the SetHubble ecosystem. See how much you can earn in 12 months.
+                </p>
+                <a href="/calculator/" class="inline-flex items-center px-8 py-4 bg-white text-black hover:bg-gray-200 font-bold rounded-full transition transform hover:scale-105 shadow-xl">
+                    Open Calculator →
+                </a>
+            </div>
+
+            <!-- Визуал (Иллюстрация графика) -->
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-full max-w-md aspect-video bg-[#0B0B15] rounded-xl border border-white/10 shadow-2xl p-6 flex flex-col justify-end overflow-hidden group">
+                    <!-- Линии графика -->
+                    <div class="absolute inset-0 flex items-end px-6 pb-6 gap-2 opacity-80">
+                        <div class="w-1/5 h-[20%] bg-gray-700/50 rounded-t"></div>
+                        <div class="w-1/5 h-[35%] bg-gray-700/50 rounded-t"></div>
+                        <div class="w-1/5 h-[45%] bg-gray-700/50 rounded-t"></div>
+                        <div class="w-1/5 h-[60%] bg-indigo-600 rounded-t shadow-[0_0_20px_rgba(79,70,229,0.5)] animate-pulse"></div>
+                        <div class="w-1/5 h-[85%] bg-indigo-500 rounded-t shadow-[0_0_30px_rgba(79,70,229,0.6)]"></div>
+                    </div>
+                    <!-- Плашка поверх -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/80 backdrop-blur-md px-6 py-3 rounded-lg border border-white/20 shadow-xl whitespace-nowrap">
+                        <span class="text-green-400 font-bold mr-2">▲ 320%</span> Growth
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 <!-- HOW IT WORKS -->
 <section class="py-20 bg-black/30 border-y border-white/5">
     <div class="container mx-auto px-6">
