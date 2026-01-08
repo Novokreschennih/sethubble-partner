@@ -1,26 +1,28 @@
 module.exports = {
-  // Все файлы в этой папке автоматически получают тег "posts"
-  // (если ты не используешь addCollection в .eleventy.js, это полезно,
-  // но у нас коллекция настроена через glob, так что это страховка)
-
   eleventyComputed: {
-    // Логика для Скрытия Черновиков
     permalink: (data) => {
-      // Если в статье стоит draft: true — файл не создаем
+      // 1. ЗАЩИТА: Если это главная страница блога (index.njk),
+      // мы не вмешиваемся, чтобы не сломать пагинацию.
+      if (data.page.base === "index.njk") {
+        return data.permalink;
+      }
+
+      // 2. ЛОГИКА ЧЕРНОВИКОВ:
+      // Если стоит draft: true — файл не создаем (permalink = false)
       if (data.draft) {
         return false;
       }
-      // Иначе используем стандартное поведение
+
+      // 3. СТАНДАРТ:
+      // Для всех остальных файлов возвращаем обычную ссылку
       return data.permalink;
     },
 
-    // Убираем черновики из списков (коллекций), чтобы они не висели пустыми ссылками
     eleventyExcludeFromCollections: (data) => {
-      // Если это черновик — исключаем
+      // Исключаем черновики из списков
       if (data.draft) {
         return true;
       }
-      // Если файл сам просил его исключить (например, index.njk) — уважаем это
       return data.eleventyExcludeFromCollections;
     },
   },
