@@ -8,7 +8,6 @@ draft: false
 ai_image_prompt: "A futuristic, cinematic scene split down the middle. On the left, a fading, monochrome logo of a legacy payment processor (resembling Stripe) sitting on a cluttered office desk. On the right, a vibrant, glowing 3D hologram of a telescope (SetHubble) projecting a network of neon blue and green connection lines to various businesses, smartphones, and crypto wallets. Dark background, high-tech atmosphere, neon accents, 3D render style."
 ---
 
-npm start
 In 2026, the gig economy is shifting under our feet. For years, creators relied on legacy processors like Stripe. But fees are eating margins. Centralized control is tightening. A new wave of innovators is looking elsewhere. They want more than a payment processor. They want a payment _ecosystem_.
 
 Enter **SetHubble**. Launched globally in December 2025 by the veterans behind QwertyPAY, this platform challenges the status quo. It merges crypto payments with a massive affiliate engine.
