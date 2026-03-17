@@ -11,5 +11,11 @@
   "affiliate_link": "https://sethubble.com/ru/p_qdr",
   "social": {
     "telegram": "https://t.me/yaronov"
+  },
+  "analytics": {
+    "vercel": true,
+    "google": "",
+    "plausible": "",
+    "plausibleDomain": ""
   }
 }

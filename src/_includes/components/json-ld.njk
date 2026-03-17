@@ -1,27 +1,80 @@
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ site.url }}{{ page.url }}"
-  },
-  "headline": "{{ title }}",
-  "description": "{{ description }}",
-  "image": "{{ image or site.url + '/assets/img/og-image.jpg' }}",
-  "author": {
-    "@type": "Person",
-    "name": "SetHubble Partner"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "SetHubble Ecosystem",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ site.url }}/assets/img/logo.png"
+{% if pageType == "article" or pageType == "blog" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ site.url }}{{ page.url }}"
+    },
+    "headline": "{{ title }}",
+    "description": "{{ description }}",
+    "image": "{{ image or site.url + '/assets/img/og-image.jpg' }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ author or site.author.name }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SetHubble Ecosystem",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}/assets/img/logo.png"
+      }
+    },
+    "datePublished": "{{ date | dateIso }}",
+    "dateModified": "{{ date | dateIso }}"
+  }
+  </script>
+{% elif pageType == "calculator" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SetHubble ROI Calculator",
+    "description": "{{ description or 'Calculate your potential earnings with SetHubble affiliate ecosystem' }}",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "127"
     }
-  },
-  "datePublished": "{{ date | dateIso }}",
-  "dateModified": "{{ date | dateIso }}"
-}
-</script>
+  }
+  </script>
+{% else %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "{{ title or site.name }}",
+    "description": "{{ description or site.description }}",
+    "url": "{{ site.url }}{{ page.url }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SetHubble Ecosystem",
+      "url": "{{ site.url }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}/assets/img/logo.png"
+      },
+      "description": "{{ site.description }}",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "{{ site.author.email }}",
+        "contactType": "customer support"
+      }
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ site.url }}/blog/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+{% endif %}

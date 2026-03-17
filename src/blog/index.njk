@@ -8,75 +8,260 @@ pagination:
   alias: posts
   reverse: true
 permalink: "/blog/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+
 ---
 
 <div class="container mx-auto px-6 py-20">
-    <!-- Заголовок -->
-    <div class="text-center mb-12">
-        <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm">Knowledge Base</span>
-        <h1 class="text-4xl md:text-6xl font-bold mt-2 mb-6">Latest <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">Insights</span></h1>
-        <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-8">
-            News, strategies, and guides on how to maximize your income with SetHubble.
-        </p>
-        
-        <!-- Облако тегов -->
-        {% include "components/tagcloud.njk" %}
-    </div>
+  <!-- Заголовок -->
+  <div class="text-center mb-12">
+    <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm"
+    >Knowledge Base</span>
+    <h1 class="text-4xl md:text-6xl font-bold mt-2 mb-6">
+      Latest <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500"
+      >Insights</span>
+    </h1>
+    <p class="text-gray-400 max-w-2xl mx-auto text-lg mb-8">
+      News, strategies, and guides on how to maximize your income with
+      SetHubble.
+    </p>
 
-    <!-- Сетка статей -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {% for post in posts %}
-        <article class="glass-card rounded-2xl overflow-hidden hover:border-indigo-500/50 transition duration-300 flex flex-col group h-full">
-            <a href="{{ post.url }}" class="flex flex-col h-full">
-                <!-- Картинка -->
-                {% if post.data.image %}
-                <div class="h-48 overflow-hidden relative">
-                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
-                </div>
+    <!-- Облако тегов -->
+    {% include "components/tagcloud.njk" %}
+  </div>
+
+  <!-- Сетка статей -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    {% for post in posts %}
+      <article class="glass-card rounded-2xl overflow-hidden hover:border-indigo-500/50 transition duration-300 flex flex-col group h-full">
+        <a href="{{ post.url }}" class="flex flex-col h-full">
+          <!-- Картинка -->
+          {% if post.data.image %}
+            <div class="h-48 overflow-hidden relative">
+              <img
+                src="{{ post.data.image }}"
+                alt="{{ post.data.title }}"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
+              >
+              <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition">
+              </div>
+            </div>
+          {% endif %}
+
+          <!-- Контент карточки -->
+          <div class="p-6 flex flex-col flex-grow">
+            <!-- Теги внутри карточки (берем первый) -->
+            <div class="mb-3">
+              {% for tag in post.data.tags %}
+                {% if tag != 'posts' %}
+                  <!-- Исключаем технический тег -->
+                  <span
+                    class="text-[10px] uppercase font-bold text-indigo-400 border border-indigo-500/30 px-2 py-1 rounded-full"
+                  >
+                    {{ siteTags[tag] or tag }}
+                  </span>
                 {% endif %}
+              {% endfor %}
+            </div>
 
-                <!-- Контент карточки -->
-                <div class="p-6 flex flex-col flex-grow">
-                    <!-- Теги внутри карточки (берем первый) -->
-                    <div class="mb-3">
-                        {% for tag in post.data.tags %}
-                            {% if tag != 'posts' %} <!-- Исключаем технический тег -->
-                            <span class="text-[10px] uppercase font-bold text-indigo-400 border border-indigo-500/30 px-2 py-1 rounded-full">
-                                {{ siteTags[tag] or tag }}
-                            </span>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+            <h2 class="text-xl font-bold mb-3 text-white group-hover:text-indigo-300 transition leading-tight">
+              {{ post.data.title }}
+            </h2>
 
-                    <h2 class="text-xl font-bold mb-3 text-white group-hover:text-indigo-300 transition leading-tight">
-                        {{ post.data.title }}
-                    </h2>
-                    
-                    <p class="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
-                        {{ post.data.description }}
-                    </p>
-                    
-                    <div class="flex justify-between items-center text-xs text-gray-500 font-mono mt-auto pt-4 border-t border-white/5">
-                        <span>{{ post.date | postDate }}</span>
-                        <span class="text-white group-hover:translate-x-1 transition-transform">Read more →</span>
-                    </div>
-                </div>
-            </a>
-        </article>
-        {% endfor %}
-    </div>
+            <p class="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+              {{ post.data.description }}
+            </p>
 
-    <!-- Навигация по страницам (Pagination) -->
-    {% if pagination.href.previous or pagination.href.next %}
+            <div class="flex justify-between items-center text-xs text-gray-500 font-mono mt-auto pt-4 border-t border-white/5">
+              <span>{{ post.date | postDate }}</span>
+              <span
+                class="text-white group-hover:translate-x-1 transition-transform"
+              >Read more →</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+
+  <!-- Навигация по страницам (Pagination) -->
+  {% if pagination.href.previous or pagination.href.next %}
     <div class="flex justify-center gap-4">
-        {% if pagination.href.previous %}
-        <a href="{{ pagination.href.previous }}" class="px-6 py-2 border border-white/10 rounded-full hover:bg-white/10 transition text-white">← Previous</a>
-        {% endif %}
-        
-        {% if pagination.href.next %}
-        <a href="{{ pagination.href.next }}" class="px-6 py-2 border border-white/10 rounded-full hover:bg-white/10 transition text-white">Next →</a>
-        {% endif %}
+      {% if pagination.href.previous %}
+        <a
+          href="{{ pagination.href.previous }}"
+          class="px-6 py-2 border border-white/10 rounded-full hover:bg-white/10 transition text-white"
+        >← Previous</a>
+      {% endif %}
+
+      {% if pagination.href.next %}
+        <a
+          href="{{ pagination.href.next }}"
+          class="px-6 py-2 border border-white/10 rounded-full hover:bg-white/10 transition text-white"
+        >Next →</a>
+      {% endif %}
     </div>
-    {% endif %}
+  {% endif %}
 </div>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-20 bg-black/30 border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm"
+      >FAQ</span>
+      <h2 class="text-3xl md:text-5xl font-bold mt-2 mb-4">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+        Everything you need to know about SetHubble and the partner program.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto space-y-4">
+      <!-- FAQ Item 1 -->
+      <div
+        data-aos="fade-up"
+        class="glass-card rounded-xl border border-white/10 overflow-hidden"
+      >
+        <details class="group">
+          <summary class="flex justify-between items-center cursor-pointer p-6 hover:bg-white/5 transition">
+            <h3 class="text-lg font-bold text-white">What is SetHubble?</h3>
+            <span
+              class="text-indigo-400 group-open:rotate-180 transition-transform"
+            >▼</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            SetHubble is the world's first decentralized referral ecosystem that
+            allows businesses to accept payments in traditional currencies (USD,
+            EUR, AED) and pay partners in USDT (BEP-20) instantly. It supports
+            up to 10 levels of referrals for viral growth.
+          </div>
+        </details>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div
+        data-aos="fade-up"
+        data-aos-delay="50"
+        class="glass-card rounded-xl border border-white/10 overflow-hidden"
+      >
+        <details class="group">
+          <summary class="flex justify-between items-center cursor-pointer p-6 hover:bg-white/5 transition">
+            <h3 class="text-lg font-bold text-white">How do I get started?</h3>
+            <span
+              class="text-indigo-400 group-open:rotate-180 transition-transform"
+            >▼</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Simply <a
+              href="{{ site.affiliate_link }}"
+              class="text-indigo-400 hover:text-indigo-300 underline"
+            >register for free</a>, verify your Telegram account for
+            notifications, and you'll receive your unique referral link. Share
+            it with your network and start earning.
+          </div>
+        </details>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div
+        data-aos="fade-up"
+        data-aos-delay="100"
+        class="glass-card rounded-xl border border-white/10 overflow-hidden"
+      >
+        <details class="group">
+          <summary class="flex justify-between items-center cursor-pointer p-6 hover:bg-white/5 transition">
+            <h3 class="text-lg font-bold text-white">
+              What currencies are supported?
+            </h3>
+            <span
+              class="text-indigo-400 group-open:rotate-180 transition-transform"
+            >▼</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Businesses can accept payments in USD, EUR, and AED. Partners
+            receive their earnings in USDT (BEP-20), which can be easily
+            converted to local currency or held as crypto.
+          </div>
+        </details>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div
+        data-aos="fade-up"
+        data-aos-delay="150"
+        class="glass-card rounded-xl border border-white/10 overflow-hidden"
+      >
+        <details class="group">
+          <summary class="flex justify-between items-center cursor-pointer p-6 hover:bg-white/5 transition">
+            <h3 class="text-lg font-bold text-white">How do referrals work?</h3>
+            <span
+              class="text-indigo-400 group-open:rotate-180 transition-transform"
+            >▼</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            SetHubble supports up to 10 levels of referrals. You earn from
+            people you directly invite (Level 1), plus smaller percentages from
+            their referrals (Level 2-10). This creates exponential earning
+            potential as your network grows.
+          </div>
+        </details>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div
+        data-aos="fade-up"
+        data-aos-delay="200"
+        class="glass-card rounded-xl border border-white/10 overflow-hidden"
+      >
+        <details class="group">
+          <summary class="flex justify-between items-center cursor-pointer p-6 hover:bg-white/5 transition">
+            <h3 class="text-lg font-bold text-white">When do I get paid?</h3>
+            <span
+              class="text-indigo-400 group-open:rotate-180 transition-transform"
+            >▼</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Withdrawals are instant! Once you reach the minimum threshold, you
+            can withdraw your USDT earnings directly to your crypto wallet at
+            any time. No waiting for monthly payouts.
+          </div>
+        </details>
+      </div>
+
+      <!-- FAQ Item 6 -->
+      <div
+        data-aos="fade-up"
+        data-aos-delay="250"
+        class="glass-card rounded-xl border border-white/10 overflow-hidden"
+      >
+        <details class="group">
+          <summary class="flex justify-between items-center cursor-pointer p-6 hover:bg-white/5 transition">
+            <h3 class="text-lg font-bold text-white">Is there a free plan?</h3>
+            <span
+              class="text-indigo-400 group-open:rotate-180 transition-transform"
+            >▼</span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed">
+            Yes! You can start completely free. No credit card required. Upgrade
+            to premium plans for advanced features and higher commission rates
+            as your business grows.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <p class="text-gray-400 mb-4">Have more questions?</p>
+      <a
+        href="{{ site.social.telegram }}"
+        target="_blank"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-bold transition"
+      >
+        <span>📬</span> Contact Us on Telegram
+      </a>
+    </div>
+  </div>
+</section>

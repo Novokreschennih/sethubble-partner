@@ -2,6 +2,7 @@ const { DateTime } = require("luxon");
 const Image = require("@11ty/eleventy-img");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const path = require("path");
+const htmlmin = require("html-minifier-terser");
 
 module.exports = function (eleventyConfig) {
   // -----------------------------------------------------------------
@@ -16,9 +17,26 @@ module.exports = function (eleventyConfig) {
       // Настройка: куда сохранять и какие форматы делать
       let metadata = await Image(src, {
         widths: [300, 600, 1200, "auto"], // Генерируем 3 размера + оригинал
-        formats: ["webp", "jpeg"], // Конвертируем в WebP + Jpeg (для старых)
+        formats: ["avif", "webp", "jpeg"], // AVIF для лучшего сжатия + WebP + Jpeg
         outputDir: "./_site/img/", // Папка куда положить готовое
         urlPath: "/img/", // Ссылка для HTML
+        quality: {
+          jpeg: 80,
+          webp: 82,
+          avif: 75,
+        },
+        sharpOptions: {
+          animated: true,
+          limitInputPixels: false,
+        },
+        sharpWebpOptions: {
+          quality: 82,
+          effort: 4,
+        },
+        sharpAvifOptions: {
+          quality: 75,
+          effort: 4,
+        },
       });
 
       let imageAttributes = {
@@ -26,10 +44,11 @@ module.exports = function (eleventyConfig) {
         sizes,
         loading: "lazy",
         decoding: "async",
+        fetchpriority: "auto",
       };
 
       return Image.generateHTML(metadata, imageAttributes);
-    }
+    },
   );
 
   // -----------------------------------------------------------------
@@ -71,7 +90,34 @@ module.exports = function (eleventyConfig) {
   });
 
   // -----------------------------------------------------------------
-  // 5. НАСТРОЙКИ
+  // 6. МИНИФИКАЦИЯ HTML (Production)
+  // -----------------------------------------------------------------
+  const isProduction = process.env.ELEVENTY_ENV === "production";
+
+  if (isProduction) {
+    eleventyConfig.addTransform("htmlmin", async function (content) {
+      if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
+        try {
+          return await htmlmin.minify(content, {
+            collapseWhitespace: true,
+            removeComments: true,
+            minifyCSS: true,
+            minifyJS: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeOptionalTags: true,
+          });
+        } catch (e) {
+          console.error("HTML minification error:", e);
+          return content;
+        }
+      }
+      return content;
+    });
+  }
+
+  // -----------------------------------------------------------------
+  // 7. НАСТРОЙКИ
   // -----------------------------------------------------------------
   return {
     markdownTemplateEngine: "njk",

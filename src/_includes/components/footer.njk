@@ -1,24 +1,110 @@
 <footer class="relative bg-black border-t border-white/10 pt-16 pb-8 overflow-hidden">
-    <div class="container mx-auto px-6 relative z-10">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-12">
-            <div class="mb-6 md:mb-0">
-                <h3 class="text-xl font-bold text-white mb-2">{{ site.name }}</h3>
-                <p class="text-gray-500 text-sm max-w-xs">
-                    Independent partner resource. Not an official representation of SetHubble Inc.
-                </p>
-            </div>
-            <div class="flex gap-6">
-                {% if site.social.telegram %}
-                <a href="{{ site.social.telegram }}" target="_blank" class="text-gray-400 hover:text-indigo-400 transition">Telegram</a>
-                {% endif %}
-            </div>
+  <!-- Background Glow -->
+  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-[600px] h-[300px] bg-indigo-600/10 rounded-full blur-[100px] -z-10">
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+          {{ site.name }}
+        </h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4 max-w-md">
+          Independent partner resource. Monetize your network with the world's
+          first decentralized referral ecosystem.
+        </p>
+        <div class="flex gap-4">
+          {% if site.social.telegram %}
+            <a
+              href="{{ site.social.telegram }}"
+              target="_blank"
+              class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-indigo-400 hover:border-indigo-500/50 transition"
+              aria-label="Telegram"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.91 1.21-5.4 3.57-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.37-.49 1.03-.74 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.89 5.17-1.9.11 0 .37.03.54.17.14.12.18.28.2.45-.01.07-.01.14-.02.21z" />
+              </svg>
+            </a>
+          {% endif %}
         </div>
-        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
-            <p>&copy; 2026 {{ site.name }}. All rights reserved.</p>
-            <div class="flex gap-4 mt-4 md:mt-0">
-                <a href="#" class="hover:text-gray-400">Privacy</a>
-                <a href="#" class="hover:text-gray-400">Terms</a>
-            </div>
-        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">
+          Quick Links
+        </h4>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="/" class="text-gray-400 hover:text-white transition"
+            >Home</a>
+          </li>
+          <li>
+            <a href="/about/" class="text-gray-400 hover:text-white transition"
+            >About</a>
+          </li>
+          <li>
+            <a
+              href="/calculator/"
+              class="text-gray-400 hover:text-white transition"
+            >Calculator</a>
+          </li>
+          <li>
+            <a href="/blog/" class="text-gray-400 hover:text-white transition"
+            >Blog</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">
+          Resources
+        </h4>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a
+              href="{{ site.affiliate_link }}"
+              target="_blank"
+              class="text-gray-400 hover:text-white transition"
+            >Sign Up</a>
+          </li>
+          <li>
+            <a
+              href="/blog/#faq"
+              class="text-gray-400 hover:text-white transition"
+            >FAQ</a>
+          </li>
+          <li>
+            <a
+              href="https://sethubble.com"
+              target="_blank"
+              class="text-gray-400 hover:text-white transition"
+            >SetHubble.com</a>
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
+      <p>&copy; 2026 {{ site.name }}. All rights reserved.</p>
+      <div class="flex gap-6 mt-4 md:mt-0">
+        <a href="/privacy/" class="hover:text-gray-400 transition"
+        >Privacy Policy</a>
+        <a href="/terms/" class="hover:text-gray-400 transition"
+        >Terms of Service</a>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-8 text-center text-xs text-gray-700">
+      <p>
+        This is an independent partner website. Not an official representation
+        of SetHubble Inc.
+      </p>
+    </div>
+  </div>
 </footer>

@@ -1,64 +1,114 @@
 <!DOCTYPE html>
 <html lang="{{ site.language }}">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title or site.name }}</title>
     <meta name="description" content="{{ description or site.description }}">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔭</text></svg>">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔭</text></svg>"
+    >
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
     <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="{{ site.url }}{{ page.url }}">
-<meta property="og:title" content="{{ title or site.name }}">
-<meta property="og:description" content="{{ description or site.description }}">
+    <meta property="og:type" content="{{ ogType or 'website' }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{{ title or site.name }}">
+    <meta
+      property="og:description"
+      content="{{ description or site.description }}"
+    >
+    <meta
+      property="og:image"
+      content="{{ image or site.url + '/assets/img/og-image.jpg' }}"
+    >
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="{{ site.language }}">
+    <meta property="og:site_name" content="{{ site.name }}">
 
-<meta property="og:image" content="{{ image or site.url + '/assets/img/og-image.jpg' }}">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta name="twitter:title" content="{{ title or site.name }}">
+    <meta
+      name="twitter:description"
+      content="{{ description or site.description }}"
+    >
+    <meta
+      name="twitter:image"
+      content="{{ image or site.url + '/assets/img/og-image.jpg' }}"
+    >
+    {% if site.social.twitter %}<meta
+        name="twitter:creator"
+        content="{{ site.social.twitter }}"
+      >{% endif %}
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
-<meta property="twitter:title" content="{{ title or site.name }}">
-<meta property="twitter:description" content="{{ description or site.description }}">
-<meta property="twitter:image" content="{{ image or site.url + '/assets/img/og-image.jpg' }}">
-    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#4f46e5">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
+
     <!-- Tailwind CSS (CDN for speed) -->
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    
+
     <!-- AOS Animation CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        body { font-family: 'Space Grotesk', sans-serif; background-color: #050510; color: #ffffff; overflow-x: hidden; }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050510; }
-        ::-webkit-scrollbar-thumb { background: #3730a3; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-    </style>
-    <!-- Vercel Analytics -->
-    <script>
-      window.va = window.va || function () { (window.va.q = window.va.q || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    {% include "components/json-ld.njk" %}
-</head>
-<body class="antialiased selection:bg-indigo-500 selection:text-white flex flex-col min-h-screen">
+body {
+  font-family: "Space Grotesk", sans-serif;
+  background-color: #050510;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050510;
+}
+::-webkit-scrollbar-thumb {
+  background: #3730a3;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
 
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+</style>
+
+    <!-- Analytics -->
+    {% include "components/analytics.njk" %}
+
+    <!-- JSON-LD -->
+    {% include "components/json-ld.njk" %}
+  </head>
+  <body class="antialiased selection:bg-indigo-500 selection:text-white flex flex-col min-h-screen">
     {% include "components/nav.njk" %}
 
     <main class="flex-grow pt-20">
-        {{ content | safe }}
+      {{ content | safe }}
     </main>
 
     {% include "components/footer.njk" %}
@@ -66,11 +116,11 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
-        });
+    AOS.init({
+  duration: 800,
+  once: true,
+  offset: 50,
+});
     </script>
-</body>
+  </body>
 </html>
